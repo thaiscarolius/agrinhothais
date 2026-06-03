@@ -1,359 +1,743 @@
+/* ============================================================================
+   CRITÉRIO AGRINHO: CSS3 RESPONSIVO E MODERNO COM EFEITOS VISUAIS
+   Arquivo: style.css
+   ============================================================================ */
+
+/* ============================================================================
+   VARIÁVEIS CSS (CUSTOM PROPERTIES) - Para melhor manutenibilidade
+   ============================================================================ */
 :root {
-    color-scheme: dark;
-    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background: #05070d;
-    color: #e8edf2;
-    line-height: 1.6;
-    font-size: 16px;
+    /* CORES - MODO CLARO */
+    --cor-primaria: #2ecc71;
+    --cor-secundaria: #3498db;
+    --cor-fundo: #ffffff;
+    --cor-texto: #2c3e50;
+    --cor-texto-claro: #7f8c8d;
+    --cor-borda: #ecf0f1;
+    --cor-hover: #27ae60;
+    
+    /* FONTE */
+    --fonte-principal: 'Arial', sans-serif;
+    --tamanho-fonte-base: 16px;
+    --tamanho-fonte-grande: 1.25rem;
+    
+    /* ESPAÇAMENTO */
+    --espacamento: 20px;
+    
+    /* TRANSIÇÕES */
+    --transicao-rapida: 0.2s ease;
+    --transicao-media: 0.4s ease;
 }
 
+/* CRITÉRIO AGRINHO: MODO ESCURO - Alternância de cores via classe */
+body.dark-mode {
+    --cor-fundo: #1a1a1a;
+    --cor-texto: #e8e8e8;
+    --cor-texto-claro: #a0a0a0;
+    --cor-borda: #333333;
+    --cor-hover: #229954;
+}
+
+/* ============================================================================
+   RESETANDO E ESTILOS GLOBAIS
+   ============================================================================ */
 * {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
-html, body {
-    margin: 0;
-    min-height: 100%;
+html {
+    scroll-behavior: smooth;
 }
 
 body {
-    background: radial-gradient(circle at top center, rgba(32, 62, 43, 0.16), transparent 36%),
-        linear-gradient(180deg, #05070d 0%, #0c111b 100%);
+    font-family: var(--fonte-principal);
+    font-size: var(--tamanho-fonte-base);
+    line-height: 1.6;
+    color: var(--cor-texto);
+    background-color: var(--cor-fundo);
+    /* CRITÉRIO AGRINHO: Transição suave entre modo claro/escuro */
+    transition: background-color var(--transicao-media), color var(--transicao-media);
 }
 
-.page-shell {
+/* ============================================================================
+   HEADER E NAVEGAÇÃO (CRITÉRIO SEMÂNTICO)
+   ============================================================================ */
+.header {
+    background: linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria));
+    color: white;
+    padding: var(--espacamento);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.header-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 32px 24px 48px;
-}
-
-.site-header {
     display: flex;
-    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    gap: 22px;
-    padding-bottom: 22px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.brand {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-}
-
-.brand-mark {
-    display: inline-flex;
-    width: 52px;
-    height: 52px;
-    border-radius: 18px;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    background: rgba(36, 71, 48, 0.2);
-}
-
-.brand strong {
-    display: block;
-    font-size: 1.05rem;
-}
-
-.brand p {
-    margin: 4px 0 0;
-    color: #a8b4c7;
-    font-size: 0.95rem;
-}
-
-.site-nav {
-    display: flex;
     flex-wrap: wrap;
-    align-items: center;
-    gap: 14px;
+    gap: var(--espacamento);
 }
 
-.site-nav a {
-    color: #dce6f0;
+.logo h1 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* NAVEGAÇÃO COM FLEXBOX */
+.navbar {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.nav-list {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* CRITÉRIO AGRINHO: EFEITO HOVER COM TRANSIÇÃO SUAVE */
+.nav-link {
+    color: white;
     text-decoration: none;
     font-weight: 500;
+    position: relative;
+    transition: opacity var(--transicao-rapida);
 }
 
-.site-nav a:hover {
-    color: #f4f9ff;
+.nav-link:hover {
+    opacity: 0.8;
+    text-decoration: underline;
 }
 
-.button {
-    display: inline-flex;
+/* BOTÃO DE MODO ESCURO/CLARO (CRITÉRIO USABILIDADE) */
+.toggle-btn {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 2px solid white;
+    padding: 8px 16px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all var(--transicao-rapida);
+    font-size: 0.9rem;
+}
+
+.toggle-btn:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
+}
+
+.toggle-btn:active {
+    transform: scale(0.98);
+}
+
+/* ============================================================================
+   SEÇÃO DE INTRODUÇÃO (CRITÉRIO SEMÂNTICO)
+   ============================================================================ */
+.introducao {
+    background-color: var(--cor-fundo);
+    padding: 60px var(--espacamento);
+    text-align: center;
+}
+
+.intro-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.intro-grid {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.intro-figure {
+    flex: 1 1 360px;
+    margin: 0;
+}
+
+.intro-figure img {
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    object-fit: cover;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+.intro-figure figcaption {
+    margin-top: 14px;
+    font-size: 0.95rem;
+    color: var(--cor-texto-claro);
+    text-align: center;
+}
+
+.intro-text {
+    flex: 1 1 500px;
+    text-align: left;
+}
+
+.intro-content h2 {
+    font-size: 2.5rem;
+    color: var(--cor-primaria);
+    margin-bottom: 25px;
+    line-height: 1.2;
+}
+
+.intro-content p {
+    font-size: 1.1rem;
+    color: var(--cor-texto-claro);
+    margin-bottom: 18px;
+    text-align: justify;
+}
+
+.fonte {
+    font-size: 0.95rem;
+    color: var(--cor-texto-claro);
+    margin-top: 10px;
+    font-style: italic;
+}
+
+@media (max-width: 900px) {
+    .intro-grid {
+        flex-direction: column;
+    }
+
+    .intro-text {
+        text-align: center;
+    }
+
+    .intro-content h2 {
+        text-align: center;
+    }
+
+    .intro-content p {
+        text-align: center;
+    }
+
+    .fonte {
+        text-align: center;
+    }
+}
+
+/* ============================================================================
+   CARROSSEL INTERATIVO (CRITÉRIO JAVASCRIPT + FLEXBOX)
+   ============================================================================ */
+.carrossel-section {
+    background-color: var(--cor-borda);
+    padding: 60px var(--espacamento);
+    text-align: center;
+}
+
+.carrossel-section h2 {
+    font-size: 2rem;
+    color: var(--cor-primaria);
+    margin-bottom: 40px;
+}
+
+.carrossel-container {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.carrossel-image-wrapper {
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.carrossel-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    /* TRANSIÇÃO SUAVE ENTRE IMAGENS */
+    transition: opacity var(--transicao-media);
+}
+
+/* CONTROLES DO CARROSSEL COM FLEXBOX */
+.carrossel-controles {
+    display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
-    border-radius: 999px;
-    padding: 14px 22px;
-    font-weight: 700;
-    text-decoration: none;
-    transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
-}
-
-.button:hover {
-    transform: translateY(-1px);
-}
-
-.button-primary {
-    background: #2da96f;
-    color: #fff;
-}
-
-.button-secondary {
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    color: #d9e7f1;
-}
-
-.button-ghost {
-    color: #d9e7f1;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    background: transparent;
-}
-
-.hero {
-    display: grid;
-    grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.8fr);
-    gap: 36px;
-    align-items: stretch;
-    margin: 40px 0 54px;
-    padding: 40px;
-    border-radius: 32px;
-    background: rgba(22, 34, 28, 0.55);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(12px);
-}
-
-.hero-copy {
-    max-width: 680px;
-}
-
-.eyebrow {
-    display: inline-block;
-    margin-bottom: 18px;
-    color: #8fc99b;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    font-size: 0.8rem;
-}
-
-.hero h1 {
-    margin: 0;
-    font-size: clamp(2.4rem, 3vw, 4rem);
-    line-height: 1.02;
-    letter-spacing: -0.03em;
-}
-
-.hero p {
-    margin: 24px 0 0;
-    max-width: 610px;
-    color: #ccd7e2;
-    font-size: 1rem;
-}
-
-.hero-actions {
-    display: flex;
+    gap: 20px;
     flex-wrap: wrap;
-    gap: 14px;
-    margin-top: 30px;
 }
 
-.hero-stats {
-    display: grid;
-    gap: 18px;
-    padding: 20px;
-    border-radius: 24px;
-    background: rgba(2, 6, 10, 0.4);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+.btn-carrossel {
+    background-color: var(--cor-primaria);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+    /* CRITÉRIO AGRINHO: Transição de cor no hover */
+    transition: all var(--transicao-rapida);
 }
 
-.hero-stats div {
-    padding: 22px 18px;
-    border-radius: 20px;
-    background: rgba(255, 255, 255, 0.03);
+.btn-carrossel:hover {
+    background-color: var(--cor-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.hero-stats strong {
-    display: block;
+.btn-carrossel:active {
+    transform: translateY(0);
+}
+
+.contador-carrossel {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: var(--cor-texto);
+    min-width: 60px;
+}
+
+/* ============================================================================
+   TÓPICOS COM GRID/FLEXBOX (CRITÉRIO RESPONSIVO)
+   ============================================================================ */
+.topicos-section {
+    background-color: var(--cor-fundo);
+    padding: 60px var(--espacamento);
+}
+
+.topicos-section h2 {
     font-size: 2rem;
-    color: #f0fff9;
-}
-
-.hero-stats span {
-    margin-top: 10px;
-    color: #a8b4c7;
-    font-size: 0.95rem;
-}
-
-.section {
-    margin-bottom: 56px;
-}
-
-.section-surface {
-    padding: 40px;
-    border-radius: 32px;
-    background: rgba(13, 18, 24, 0.72);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.section-intro {
-    margin: 0 0 14px;
-    color: #86b291;
-    font-weight: 700;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    font-size: 0.8rem;
-}
-
-.section h2 {
-    margin: 0 0 18px;
-    font-size: 2.2rem;
-    line-height: 1.1;
-}
-
-.section-content {
-    display: grid;
-    gap: 32px;
-}
-
-.feature-grid,
-.card-grid,
-.impact-list {
-    display: grid;
-    gap: 24px;
-}
-
-.feature-grid {
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-}
-
-.feature-card,
-.project-card,
-.impact-list article {
-    padding: 24px;
-    border-radius: 24px;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.feature-card h3,
-.project-card h3,
-.impact-list h3 {
-    margin: 0 0 12px;
-    font-size: 1.15rem;
-}
-
-.feature-card p,
-.project-card p,
-.impact-list p {
-    margin: 0;
-    color: #c2ccd5;
-}
-
-.card-grid {
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-}
-
-.project-card ul {
-    margin: 20px 0 0;
-    padding-left: 20px;
-    color: #c8d5e2;
-}
-
-.project-card li {
-    margin-bottom: 10px;
-}
-
-.section-impact {
-    display: grid;
-    grid-template-columns: minmax(0, 1.3fr) minmax(250px, 1fr);
-    gap: 32px;
-    align-items: center;
-}
-
-.impact-copy p {
-    max-width: 620px;
-}
-
-.impact-list {
-    grid-template-columns: 1fr;
-}
-
-.section-cta {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 24px;
-    padding: 36px 40px;
-    border-radius: 32px;
-    background: linear-gradient(135deg, rgba(35, 88, 58, 0.18), rgba(13, 20, 32, 0.98));
-    border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.section-cta h2 {
-    margin-top: 0;
-}
-
-.site-footer {
+    color: var(--cor-primaria);
     text-align: center;
-    color: #8c99ad;
+    margin-bottom: 50px;
+}
+
+/* CRITÉRIO AGRINHO: GRID RESPONSIVO */
+.topicos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* CARDS COM EFEITOS VISUAIS */
+.topico-card {
+    background-color: var(--cor-borda);
+    border-radius: 15px;
+    overflow: hidden;
+    text-align: center;
+    transition: transform var(--transicao-media), box-shadow var(--transicao-media), background-color var(--transicao-media);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.topico-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(46, 204, 113, 0.22);
+    background-color: var(--cor-primaria);
+    color: white;
+}
+
+.topico-card-img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+}
+
+.topico-card-content {
+    padding: 25px;
+}
+
+.topico-card h3 {
+    font-size: 1.4rem;
+    margin: 0 0 15px;
+    color: var(--cor-primaria);
+}
+
+.topico-card:hover h3 {
+    color: white;
+}
+
+.topico-card p {
+    color: var(--cor-texto-claro);
+    line-height: 1.6;
+    margin: 0;
+}
+
+.topico-card:hover p {
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.topico-card:hover .topico-card-img {
+    filter: brightness(0.9);
+}
+
+/* ============================================================================
+   VÍDEO RESPONSIVO (CRITÉRIO IFRAME)
+   ============================================================================ */
+.video-section {
+    background-color: var(--cor-borda);
+    padding: 60px var(--espacamento);
+    text-align: center;
+}
+
+.video-section h2 {
+    font-size: 2rem;
+    color: var(--cor-primaria);
+    margin-bottom: 40px;
+}
+
+/* WRAPPER PARA FAZER IFRAME RESPONSIVO */
+.video-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* ============================================================================
+   FORMULÁRIO INTERATIVO (CRITÉRIO OBRIGATÓRIO)
+   ============================================================================ */
+.formulario-section {
+    background-color: var(--cor-fundo);
+    padding: 60px var(--espacamento);
+}
+
+.formulario-section h2 {
+    font-size: 2rem;
+    color: var(--cor-primaria);
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.form-contato {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: var(--cor-borda);
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* GRUPO DE FORMULÁRIO */
+.form-grupo {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-label {
+    font-weight: bold;
+    color: var(--cor-texto);
     font-size: 0.95rem;
-    padding-top: 20px;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-@media (max-width: 860px) {
-    .hero,
-    .section-impact,
-    .section-cta {
-        grid-template-columns: 1fr;
-    }
-
-    .hero {
-        padding: 28px;
-    }
+/* INPUTS SEMÂNTICOS COM ESTILOS */
+.form-input,
+.form-textarea {
+    padding: 12px 15px;
+    border: 2px solid var(--cor-primaria);
+    border-radius: 5px;
+    font-family: var(--fonte-principal);
+    font-size: 1rem;
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+    /* CRITÉRIO AGRINHO: Transição no focus */
+    transition: all var(--transicao-rapida);
 }
 
-@media (max-width: 640px) {
-    .page-shell {
-        padding: 24px 18px 36px;
-    }
-
-    .hero {
-        margin: 28px 0 42px;
-    }
-
-    .site-header {
-        align-items: flex-start;
-    }
-
-    .hero-stats {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    .hero-stats div {
-        padding: 18px;
-    }
+.form-input:focus,
+.form-textarea:focus {
+    outline: none;
+    border-color: var(--cor-secundaria);
+    box-shadow: 0 0 8px rgba(52, 152, 219, 0.3);
+    background-color: var(--cor-fundo);
 }
 
-@media (max-width: 520px) {
-    .hero-stats {
-        grid-template-columns: 1fr;
-    }
+.form-textarea {
+    resize: vertical;
+    min-height: 120px;
+}
 
-    .site-nav {
-        width: 100%;
-        justify-content: flex-start;
-    }
+/* BOTÃO DE ENVIO DO FORMULÁRIO */
+.btn-enviar {
+    background-color: var(--cor-primaria);
+    color: white;
+    border: none;
+    padding: 14px 30px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    /* CRITÉRIO AGRINHO: Feedback visual com transição */
+    transition: all var(--transicao-rapida);
+    margin-top: 10px;
+}
 
-    .hero-actions,
-    .section-cta {
+.btn-enviar:hover {
+    background-color: var(--cor-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(46, 204, 113, 0.3);
+}
+
+.btn-enviar:active {
+    transform: translateY(0);
+}
+
+/* MENSAGEM DE SUCESSO (JavaScript obrigatório) */
+.mensagem-sucesso {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: rgba(46, 204, 113, 0.1);
+    border-left: 4px solid var(--cor-primaria);
+    border-radius: 5px;
+    text-align: center;
+}
+
+.mensagem-sucesso p {
+    color: var(--cor-primaria);
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+/* ============================================================================
+   FOOTER
+   ============================================================================ */
+.footer {
+    background: linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria));
+    color: white;
+    text-align: center;
+    padding: 30px var(--espacamento);
+    margin-top: 60px;
+}
+
+.footer-content p {
+    margin: 10px 0;
+    font-size: 0.95rem;
+}
+
+/* ============================================================================
+   CRITÉRIO AGRINHO: MEDIA QUERIES - RESPONSIVIDADE (MOBILE, TABLET, DESKTOP)
+   ============================================================================ */
+
+/* TABLETS (768px e acima) */
+@media (max-width: 768px) {
+    .header-container {
         flex-direction: column;
-        align-items: stretch;
+        align-items: center;
     }
+
+    .navbar {
+        flex: none;
+        width: 100%;
+    }
+
+    .nav-list {
+        gap: 15px;
+        font-size: 0.9rem;
+    }
+
+    .logo h1 {
+        font-size: 1.5rem;
+    }
+
+    .intro-content h2 {
+        font-size: 2rem;
+    }
+
+    .intro-content p {
+        font-size: 1rem;
+    }
+
+    .carrossel-section h2,
+    .topicos-section h2,
+    .video-section h2,
+    .formulario-section h2 {
+        font-size: 1.5rem;
+    }
+
+    .topicos-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+    }
+
+    .topico-card {
+        padding: 20px;
+    }
+
+    .form-contato {
+        padding: 30px 20px;
+    }
+}
+
+/* CELULARES (480px e abaixo) */
+@media (max-width: 480px) {
+    body {
+        font-size: 14px;
+    }
+
+    .header-container {
+        padding: 15px;
+    }
+
+    .logo h1 {
+        font-size: 1.2rem;
+    }
+
+    .nav-list {
+        gap: 10px;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav-link {
+        display: block;
+        padding: 8px;
+    }
+
+    .toggle-btn {
+        width: 100%;
+        padding: 10px;
+        font-size: 0.8rem;
+    }
+
+    .introducao,
+    .carrossel-section,
+    .topicos-section,
+    .video-section,
+    .formulario-section {
+        padding: 40px 15px;
+    }
+
+    .intro-content h2 {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+    }
+
+    .intro-content p {
+        font-size: 0.95rem;
+        margin-bottom: 15px;
+    }
+
+    .carrossel-section h2,
+    .topicos-section h2,
+    .video-section h2,
+    .formulario-section h2 {
+        font-size: 1.3rem;
+        margin-bottom: 30px;
+    }
+
+    .carrossel-controles {
+        gap: 10px;
+    }
+
+    .btn-carrossel {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+    }
+
+    .topicos-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .topico-card {
+        padding: 15px;
+    }
+
+    .topico-card .card-icone {
+        font-size: 2.5rem;
+    }
+
+    .topico-card h3 {
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+    }
+
+    .form-contato {
+        padding: 20px 15px;
+        gap: 15px;
+    }
+
+    .form-input,
+    .form-textarea {
+        padding: 10px 12px;
+        font-size: 0.95rem;
+    }
+
+    .btn-enviar {
+        padding: 12px 20px;
+        font-size: 1rem;
+    }
+
+    .footer-content p {
+        font-size: 0.9rem;
+    }
+}
+
+/* ============================================================================
+   CLASSE DE ACESSIBILIDADE - AUMENTAR FONTE (CRITÉRIO USABILIDADE)
+   ============================================================================ */
+body.fonte-grande {
+    --tamanho-fonte-base: 18px;
+    --tamanho-fonte-grande: 1.4rem;
+}
+
+body.fonte-grande .intro-content h2,
+body.fonte-grande .carrossel-section h2,
+body.fonte-grande .topicos-section h2,
+body.fonte-grande .video-section h2,
+body.fonte-grande .formulario-section h2 {
+    font-size: 2.2rem;
+}
+
+body.fonte-grande .logo h1 {
+    font-size: 2rem;
+}
+
+/* ============================================================================
+   ANIMAÇÕES E TRANSIÇÕES GERAIS
+   ============================================================================ */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+section {
+    animation: fadeIn 0.6s ease-out;
 }
